@@ -36,8 +36,8 @@ def shift_letter(letter, shift):
     # Stay within the function. Only use the parameters as input. The function should return your answer.
       if letter == " ":
         return " "
-      shifted_index = (ord(letter) - ord('A') + shift) % 26
-      return chr(ord('A') + shifted_index)
+    shifted_index = (ord(letter) - ord('A') + shift) % 26
+    return chr(ord('A') + shifted_index)
 
 def caesar_cipher(message, shift):
     '''Caesar Cipher.
