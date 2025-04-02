@@ -38,8 +38,19 @@ def relationship_status(from_member, to_member, social_graph):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
-
+    
+    if from_member in social_graph and to_member in social_graph:
+        follows_from = to_member in social_graph[from_member]["following"]
+        follows_to = from_member in social_graph[to_member]["following"]
+        
+        if follows_from and follows_to:
+            return "friends"
+        elif follows_from:
+            return "follower"
+        elif follows_to:
+            return "followed by"
+    
+    return "no relationship"
 
 def tic_tac_toe(board):
     '''Tic Tac Toe.
@@ -66,7 +77,22 @@ def tic_tac_toe(board):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    size = len(board)
+    
+    # To check rows and columns
+    for i in range(size):
+        if len(set(board[i])) == 1 and board[i][0] != "":
+            return board[i][0]
+        if len(set(row[i] for row in board)) == 1 and board[0][i] != "":
+            return board[0][i]
+    
+    # To check diagonals
+    if len(set(board[i][i] for i in range(size))) == 1 and board[0][0] != "":
+        return board[0][0]
+    if len(set(board[i][size - 1 - i] for i in range(size))) == 1 and board[0][size - 1] != "":
+        return board[0][size - 1]
+    
+    return "NO WINNER"
 
 def eta(first_stop, second_stop, route_map):
     '''ETA.
@@ -98,4 +124,15 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    total_time = 0
+    current_stop = first_stop
+
+    while current_stop != second_stop:
+        for (start, end), info in route_map.items():
+            if start == current_stop:
+                total_time += info["travel_time_mins"]
+                current_stop = end
+                break
+
+    return total_time
+
